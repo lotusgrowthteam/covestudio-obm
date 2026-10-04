@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Cove Studio: online business managers and system consultants for coaches, therapists, healers and course creators. Systems, marketing and sales, built and run for you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M72 18 A36 36 0 1 0 72 82' fill='none' stroke='%2317302D' stroke-width='9' stroke-linecap='round'/%3E%3Cpath d='M36 48 q8 -6 16 0 t16 0' fill='none' stroke='%232F6B62' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M42 62 q6 -5 12 0 t12 0' fill='none' stroke='%232F6B62' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>Cove Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Karla:wght@400;500;600&display=swap">
+<style>
+/* Layout: a calm single column that widens into quiet two- and three-column bands; one deep "cove" band holds the enquiry flow. */
+:root{
+  --bg:#F4F6F5;          /* sea mist */
+  --surface:#FFFFFF;
+  --ink:#17302D;         /* deep cove green */
+  --muted:#586B67;
+  --line:#D8E0DD;
+  --accent:#2F6B62;      /* sea glass, deeper */
+  --accent-soft:#E3EEEB;
+  --band:#17302D;
+  --band-ink:#EEF3F1;
+  --band-muted:#A9BDB8;
+  --focus:#2F6B62;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"Karla", "Helvetica Neue", Arial, sans-serif;
+  --wrap:1120px;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101B1A; --surface:#162523; --ink:#E7EEEC; --muted:#9FB2AE; --line:#2A3B38;
+    --accent:#8CC2B7; --accent-soft:#1D3431; --band:#0B1413; --band-ink:#E7EEEC; --band-muted:#93A8A3; --focus:#8CC2B7;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101B1A; --surface:#162523; --ink:#E7EEEC; --muted:#9FB2AE; --line:#2A3B38;
+  --accent:#8CC2B7; --accent-soft:#1D3431; --band:#0B1413; --band-ink:#E7EEEC; --band-muted:#93A8A3; --focus:#8CC2B7;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-0.01em}
+h1{font-size:clamp(2.4rem,5.4vw,4rem)}
+h2{font-size:clamp(1.9rem,3.4vw,2.6rem)}
+h3{font-size:1.45rem}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
+section{padding-block:clamp(64px,9vw,112px)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:600 1rem/1 var(--body);padding:.95rem 1.4rem;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* Header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:14px}
+.logo{font-family:var(--display);font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:.55rem}
+.logo svg{width:30px;height:30px}
+nav.main{display:flex;gap:1.6rem;align-items:center}
+nav.main a{text-decoration:none;color:var(--muted);font-size:.95rem}
+nav.main a:hover{color:var(--ink)}
+@media (max-width:760px){nav.main .nav-link{display:none}.btn-sm{padding:.7rem 1rem;font-size:.9rem}}
+
+/* Hero */
+.hero{padding-block:clamp(56px,9vw,120px) clamp(48px,7vw,88px)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,5vw,72px);align-items:end}
+.hero h1{max-width:14ch}
+.hero .lead{margin-top:1.4rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.hours{margin-top:1.6rem;font-size:.92rem;color:var(--muted);display:flex;align-items:center;gap:.5rem}
+.hours .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hero-note{border-left:1px solid var(--line);padding-left:1.5rem;display:grid;gap:1.1rem}
+.hero-note p{color:var(--muted);font-size:.98rem}
+.hero-note strong{display:block;color:var(--ink);font-weight:600;font-size:1rem;margin-bottom:.15rem}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-note{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:1.5rem}}
+
+/* Familiar */
+.familiar{border-top:1px solid var(--line)}
+.two-col{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,80px)}
+@media (max-width:860px){.two-col{grid-template-columns:1fr}}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.checklist li{padding:1.1rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem;min-width:0}
+.checklist li:first-child{border-top:1px solid var(--line)}
+.checklist svg{width:18px;height:18px;margin-top:.3rem;color:var(--accent)}
+
+/* Services */
+.services{background:var(--surface);border-block:1px solid var(--line)}
+.section-head{display:grid;gap:1rem;max-width:62ch;margin-bottom:clamp(36px,5vw,56px)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+@media (max-width:960px){.tiers{grid-template-columns:1fr}}
+.tier{border:1px solid var(--line);border-radius:var(--radius);padding:2rem 1.75rem;display:flex;flex-direction:column;gap:1.1rem;background:var(--bg);min-width:0}
+.tier.featured{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tier.featured .tier-sub,.tier.featured li{color:color-mix(in srgb,var(--bg) 80%,var(--ink))}
+.tier-top{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.badge{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:.35rem .7rem;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.tier.featured .badge{background:color-mix(in srgb,var(--bg) 16%,transparent);color:var(--bg)}
+.tier-sub{color:var(--muted)}
+.tier .includes{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;opacity:.75;margin-top:.3rem}
+.tier ul{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;font-size:.97rem;color:var(--muted)}
+.tier li{position:relative;padding-left:1.3rem}
+.tier li::before{content:"";position:absolute;left:0;top:.66rem;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.6}
+.tier .btn{margin-top:auto}
+.tier.featured .btn-primary{background:var(--bg);color:var(--ink)}
+.tier.featured .btn-primary:hover{background:var(--accent-soft)}
+.tier{padding:0;gap:0}
+.tier-head{all:unset;box-sizing:border-box;display:grid;gap:.7rem;padding:2rem 1.75rem 1.5rem;cursor:pointer;width:100%;border-radius:var(--radius)}
+.tier-head:focus-visible{outline:2px solid var(--focus);outline-offset:-4px}
+.tier-name{font-family:var(--display);font-size:1.6rem;line-height:1.15}
+.price{display:flex;align-items:baseline;gap:.35rem;flex-wrap:wrap;margin-top:.2rem}
+.price .amt{font-family:var(--display);font-size:2rem;line-height:1}
+.price .from,.launch-price .from{flex-basis:100%;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;opacity:.7}
+.price .per,.setup{font-size:.92rem;opacity:.75}
+.toggle-label{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.4rem;padding-top:1rem;border-top:1px solid currentColor;border-top-color:color-mix(in srgb,currentColor 18%,transparent);font-weight:600;font-size:.93rem}
+.plus{position:relative;width:14px;height:14px;flex:none}
+.plus::before,.plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.6px;background:currentColor;transform:translateY(-50%);transition:transform .25s}
+.plus::after{transform:translateY(-50%) rotate(90deg)}
+[aria-expanded="true"] .plus::after{transform:translateY(-50%) rotate(0deg)}
+.tier-body{padding:0 1.75rem 2rem;display:grid;gap:1.1rem;animation:roll .3s ease}
+@keyframes roll{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.tier-body{animation:none}}
+.tier li strong{color:inherit;font-weight:600}
+.tier.featured .tier-body li{color:color-mix(in srgb,var(--bg) 82%,var(--ink))}
+.tier.featured .tier-body li strong{color:var(--bg)}
+.tier:not(.featured) .tier-body li strong{color:var(--ink)}
+.tiers{align-items:start}
+.pricing-note{margin-top:1.8rem;color:var(--muted);font-size:.95rem}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:step;list-style:none;padding:0;margin:0}
+@media (max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.steps li{border-top:1px solid var(--ink);padding-top:1.1rem;display:grid;gap:.5rem;min-width:0}
+.steps li::before{counter-increment:step;content:counter(step);font-family:var(--display);font-size:1.6rem;color:var(--accent)}
+.steps p{color:var(--muted);font-size:.97rem}
+
+/* Journey */
+.journey{border-top:1px solid var(--line)}
+.path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:1000px){.path{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.path{grid-template-columns:1fr}}
+.path li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.2rem;display:grid;gap:.5rem;align-content:start;min-width:0}
+.path li:not(:last-child)::after{content:"";position:absolute;top:1.85rem;right:-12px;width:10px;height:1.5px;background:var(--accent)}
+@media (max-width:1000px){.path li::after{display:none}}
+.p-step{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.path h3{font-size:1.15rem}
+.path p{color:var(--muted);font-size:.93rem}
+.auto{justify-self:start;font-size:.75rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-top:.3rem}
+.path-foot{margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}
+.path-foot p{color:var(--muted);max-width:62ch}
+.path-foot strong{color:var(--ink)}
+/* Launch offer */
+.launch{margin-top:20px;border:1px dashed var(--accent);border-radius:var(--radius);padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,4vw,48px);background:var(--bg)}
+@media (max-width:860px){.launch{grid-template-columns:1fr}}
+.launch h3{font-size:1.6rem;margin-top:.5rem}
+.launch-price{display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;margin-block:.6rem}
+.launch-price .amt{font-family:var(--display);font-size:2rem;line-height:1}
+.launch-price .per{font-size:.92rem;color:var(--muted)}
+.launch-list{display:grid;gap:1.1rem;align-content:start;min-width:0}
+.launch ul{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;color:var(--muted);font-size:.97rem}
+.launch li{position:relative;padding-left:1.3rem}
+.launch li::before{content:"";position:absolute;left:0;top:.66rem;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.launch .btn{justify-self:start}
+/* Enquiry band */
+.band{background:var(--band);color:var(--band-ink)}
+.band .eyebrow{color:var(--band-muted)}
+.band .lead{color:var(--band-muted)}
+.enquiry-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:start}
+@media (max-width:900px){.enquiry-grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);color:var(--ink);border-radius:var(--radius);padding:clamp(22px,3vw,36px);min-width:0}
+form{display:grid;gap:1.2rem}
+.field{display:grid;gap:.45rem;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
+label,.legend{font-weight:600;font-size:.93rem}
+.hint{font-weight:400;color:var(--muted)}
+input[type=text],input[type=email],select,textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.75rem .85rem}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:transparent}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:.6rem;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:.55rem .9rem;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:var(--bg);transition:background .15s,border-color .15s,color .15s}
+.chip input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip input:focus-visible + span{outline:2px solid var(--focus);outline-offset:2px}
+.error{color:#B3261E;font-size:.9rem}
+:root[data-theme="dark"] .error{color:#F2B8B5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .error{color:#F2B8B5}}
+.flow{display:grid;gap:1rem;margin-top:2rem}
+.flow-step{display:grid;grid-template-columns:28px 1fr;gap:.8rem;align-items:start;color:var(--band-muted);font-size:.97rem}
+.flow-step .num{width:28px;height:28px;border-radius:50%;border:1px solid var(--band-muted);display:grid;place-items:center;font-size:.8rem;transition:background .3s,color .3s,border-color .3s}
+.flow-step.done{color:var(--band-ink)}
+.flow-step.done .num{background:var(--band-ink);color:var(--band);border-color:var(--band-ink)}
+.result{display:grid;gap:1.1rem}
+.result .rec{border:1px solid var(--line);border-radius:8px;padding:1.2rem;background:var(--accent-soft)}
+.result .rec h3{margin-top:.3rem}
+.result .rec p{color:var(--muted);margin-top:.4rem}
+.preview-note{font-size:.85rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:1rem}
+
+/* About */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:2.4rem}
+@media (max-width:860px){.team{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.team{grid-template-columns:1fr}}
+.person{display:grid;gap:.7rem}
+.photo{aspect-ratio:4/5;max-width:100%;border-radius:var(--radius);background:linear-gradient(160deg,var(--accent-soft),var(--line));display:grid;place-items:center;color:var(--muted);font-size:.85rem}
+.person .role{color:var(--muted);font-size:.95rem}
+.values{display:grid;gap:1.4rem;align-content:start}
+.values div{border-top:1px solid var(--line);padding-top:1rem}
+.values p{color:var(--muted);margin-top:.3rem}
+
+.exp{list-style:none;margin:0;padding:0;display:grid}
+.exp li{display:grid;grid-template-columns:minmax(0,11rem) 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--line);min-width:0}
+.exp li:first-child{border-top:1px solid var(--line)}
+.exp-k{font-family:var(--display);font-size:1.25rem;line-height:1.3;color:var(--accent)}
+.exp li > span:last-child{color:var(--muted);min-width:0}
+.ph{font-size:.85rem;opacity:.8}
+@media (max-width:520px){.exp li{grid-template-columns:1fr;gap:.2rem}}
+/* FAQ */
+.faq{border-top:1px solid var(--line)}
+.faq-list{display:grid}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:1.25rem 0;display:flex;justify-content:space-between;gap:1rem;font-family:var(--display);font-size:1.25rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--body);color:var(--accent);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding-bottom:1.3rem;max-width:64ch}
+
+/* Final CTA + footer */
+.cta{text-align:left}
+.cta-box{border:1px solid var(--line);border-radius:var(--radius);padding:clamp(28px,5vw,56px);display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;background:var(--surface)}
+.cta-box h2{max-width:18ch}
+footer{border-top:1px solid var(--line);padding-block:40px;color:var(--muted);font-size:.93rem}
+footer .wrap{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.foot-links{display:flex;gap:1.2rem;flex-wrap:wrap}
+.copy{border:0;background:none;color:var(--accent);font:inherit;cursor:pointer;padding:0;text-decoration:underline}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Cove Studio home">
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M72 18 A36 36 0 1 0 72 82" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M36 48 q8 -6 16 0 t16 0" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/><path d="M42 62 q6 -5 12 0 t12 0" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/></svg>
+      Cove Studio
+    </a>
+    <nav class="main" aria-label="Main">
+      <a class="nav-link" href="#journey">How it fits</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="btn btn-primary btn-sm" href="#start">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Online business manager &amp; system consultant</p>
+        <h1 style="margin-top:1rem">We run the business side, so you can focus on your clients.</h1>
+        <p class="lead">For coaches, therapists, healers and course creators. We review how you attract, win and look after clients today, recommend a clear plan, then make it happen: connected systems, consistent marketing, and a sales process that turns enquiries into paying clients.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#start">Book your free systems review</a>
+          <a class="btn btn-ghost" href="#how">See how we work</a>
+        </div>
+        <p class="hours"><span class="dot" aria-hidden="true"></span>We work Australian business hours (AEST/AEDT).</p>
+      </div>
+      <div class="hero-note">
+        <p><strong>Systems</strong>Bookings, payments, client records and emails, connected and automated.</p>
+        <p><strong>Marketing</strong>Content and newsletters planned, created and sent on schedule, in your voice.</p>
+        <p><strong>Sales</strong>Every enquiry followed up, and a clear path from first contact to paying client.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="familiar">
+    <div class="wrap two-col">
+      <div>
+        <p class="eyebrow">Sound familiar?</p>
+        <h2 style="margin-top:.8rem">Great at your work. Stretched on everything else.</h2>
+      </div>
+      <ul class="checklist">
+        <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Your posts and newsletters go out when you find time, not on a plan.</span></li>
+        <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Enquiries come in, but not enough of them become paying clients.</span></li>
+        <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Your tools don't talk to each other, so you copy details by hand.</span></li>
+        <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>You're launching and not sure where to start with tools, marketing or sales.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="journey" id="journey">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The full journey, with our Partner package</p>
+        <h2>From first look to loyal client</h2>
+        <p class="lead">With Partner, we manage every step of how clients find you, choose you and stay with you. Here's what that looks like.</p>
+      </div>
+      <ol class="path">
+        <li><span class="p-step">Marketing</span><h3>The right people find you</h3><p>Strategic campaigns aimed at your ideal clients. A clear content plan, targeted posts and newsletters that attract people ready to work with you, not just more followers.</p></li>
+        <li><span class="p-step">Sales</span><h3>Every enquiry is handled well</h3><p>A fast, personal reply and a clear next step for every enquiry. We manage your sales pipeline, so no potential client is missed or left waiting.</p></li>
+        <li><span class="p-step">Sales</span><h3>More of them say yes</h3><p>A tested discovery-call process, tailored proposals and timely follow-up that turn more conversations into paying clients.</p></li>
+        <li><span class="p-step">Systems</span><h3>They start with confidence</h3><p>A smooth, professional start: agreements, payments, a welcome pack and reminders, all connected and running on their own.</p></li>
+        <li><span class="p-step">Growth</span><h3>They return and refer</h3><p>Review requests, rebooking offers and referral campaigns that turn happy clients into repeat clients and your best source of new ones.</p></li>
+      </ol>
+      <div class="path-foot">
+        <p><strong>Behind every step:</strong> monthly reports on what's working, and quarterly strategy sessions to plan your next move.</p>
+        <a class="btn btn-ghost" href="#services" id="see-partner">See the Partner package</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Services</p>
+        <h2>Three ways we can help</h2>
+        <p class="lead">Each option includes everything in the one before it. Start where you need help most, and change as your business grows.</p>
+      </div>
+      <div class="tiers">
+        <article class="tier" data-card>
+          <button class="tier-head" type="button" aria-expanded="false" aria-controls="t-ess">
+            <span class="tier-top"><span class="tier-name">Essentials</span></span>
+            <span class="price"><span class="from">Starting from</span> <span class="amt">USD 650</span> <span class="per">/ month</span></span>
+            <span class="tier-sub">Reliable day-to-day support across admin, enquiries and marketing, so nothing slips.</span>
+            <span class="toggle-label"><span class="tl-text">See what's included</span><span class="plus" aria-hidden="true"></span></span>
+          </button>
+          <div class="tier-body" id="t-ess" hidden>
+            <ul>
+              <li><strong>Admin:</strong> inbox, calendar, invoices and payment reminders</li>
+              <li><strong>Sales support:</strong> replying to enquiries and booking discovery calls</li>
+              <li><strong>Marketing support:</strong> co-creating your posts and newsletters with you, then scheduling them</li>
+              <li><strong>Client care:</strong> bookings, reminders and client messages</li>
+              <li>A weekly update on what we've done</li>
+            </ul>
+            <a class="btn btn-ghost" href="#start" data-tier="Essentials">Ask about Essentials</a>
+          </div>
+        </article>
+        <article class="tier featured" data-card>
+          <button class="tier-head" type="button" aria-expanded="false" aria-controls="t-gro">
+            <span class="tier-top"><span class="tier-name">Growth</span><span class="badge">Recommended</span></span>
+            <span class="price"><span class="from">Starting from</span> <span class="amt">USD 1,500</span> <span class="per">/ month</span></span>
+            <span class="setup">+ one-off setup from USD 2,600, if you don't have systems yet</span>
+            <span class="tier-sub">Connected systems, consistent marketing and a sales process that works, built and run for you.</span>
+            <span class="toggle-label"><span class="tl-text">See what's included</span><span class="plus" aria-hidden="true"></span></span>
+          </button>
+          <div class="tier-body" id="t-gro" hidden>
+            <p class="includes">Everything in Essentials, plus</p>
+            <ul>
+              <li><strong>Systems:</strong> connect and automate your booking, forms, client records, payments and email</li>
+              <li><strong>Marketing:</strong> plan, create and send your social content and newsletters every month</li>
+              <li><strong>Email nurture:</strong> welcome and follow-up sequences that build trust with new subscribers</li>
+              <li><strong>Sales:</strong> a clear enquiry-to-client process, with discovery calls, proposals and follow-up</li>
+              <li><strong>AI:</strong> tools set up for your business that draft emails and content in your voice</li>
+              <li><strong>Monthly review:</strong> what's working across systems, marketing and sales, and what we'll improve</li>
+            </ul>
+            <a class="btn btn-primary" href="#start" data-tier="Growth">Ask about Growth</a>
+          </div>
+        </article>
+        <article class="tier" data-card>
+          <button class="tier-head" type="button" aria-expanded="false" aria-controls="t-par">
+            <span class="tier-top"><span class="tier-name">Partner</span></span>
+            <span class="price"><span class="amt">Tailored</span> <span class="per">to your business</span></span>
+            <span class="tier-sub">Your strategic partner, managing your systems, marketing, sales and projects with you.</span>
+            <span class="toggle-label"><span class="tl-text">See what's included</span><span class="plus" aria-hidden="true"></span></span>
+          </button>
+          <div class="tier-body" id="t-par" hidden>
+            <p class="includes">Everything in Growth, plus</p>
+            <ul>
+              <li>Plan and run marketing campaigns and promotions</li>
+              <li>Manage your sales pipeline, with a weekly lead report</li>
+              <li>Plan, manage and deliver your launches and projects</li>
+              <li>Full management of your systems and tools</li>
+              <li>Track your key numbers, with a monthly performance report</li>
+              <li>Quarterly strategy sessions, plus leading your team and contractors</li>
+            </ul>
+            <a class="btn btn-ghost" href="#start" data-tier="Partner">Talk to us about Partner</a>
+          </div>
+        </article>
+      </div>
+      <div class="launch">
+        <div>
+          <p class="eyebrow">Just starting out?</p>
+          <h3>Launch Setup</h3>
+          <p class="launch-price"><span class="from">Starting from</span> <span class="amt">USD 3,000</span> <span class="per">one-off, no monthly plan needed</span></p>
+          <p class="tier-sub">Launch with the right foundations for systems, marketing and sales, so you can welcome your first clients with confidence.</p>
+        </div>
+        <div class="launch-list">
+          <ul>
+            <li>Recommend the right, affordable tools for a new business</li>
+            <li>Build and connect your booking page, intake form and online payments</li>
+            <li>Set up your email list and a welcome sequence for new subscribers</li>
+            <li>Create a simple sales process: discovery-call booking and a proposal template</li>
+            <li>A recorded walkthrough so you know how it all works</li>
+          </ul>
+          <a class="btn btn-primary" href="#start" data-tier="Launch">Ask about Launch Setup</a>
+        </div>
+      </div>
+      <p class="pricing-note">Click a package to see what's included. Growth setup takes 3 to 6 weeks, and your monthly plan starts once your systems are live.</p>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2>Consult. Recommend. Execute.</h2>
+        <p class="lead">We don't guess. We look at how your business really runs, agree on a plan with you, then do the work.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Consult</h3><p>We review your systems, marketing and sales: every tool, channel and step from first contact to paying client. We find where time, money and clients slip away.</p></li>
+        <li><h3>Recommend</h3><p>You get a clear plan: what to fix in your systems, how to market consistently, and how to turn more enquiries into clients, with a timeline and a fixed price.</p></li>
+        <li><h3>Execute</h3><p>We build and connect your systems, create your marketing, and set up your sales process. We test everything and show you how it works.</p></li>
+        <li><h3>Manage</h3><p>Every month we run your systems, send your marketing, follow up your enquiries, and improve what we can.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="start">
+    <div class="wrap enquiry-grid">
+      <div>
+        <p class="eyebrow">Start here</p>
+        <h2 style="margin-top:.8rem">Tell us a little about your business</h2>
+        <p class="lead" style="margin-top:1rem">Answer a few questions and get an instant recommendation. Then book your free systems review, a 30-minute call where we look at your current setup together.</p>
+        <div class="flow" aria-label="What happens after you send the form">
+          <div class="flow-step" id="f1"><span class="num">1</span><span>You share a few details</span></div>
+          <div class="flow-step" id="f2"><span class="num">2</span><span>We recommend the best place to start</span></div>
+          <div class="flow-step" id="f3"><span class="num">3</span><span>You choose a time for your free call</span></div>
+          <div class="flow-step" id="f4"><span class="num">4</span><span>You get a confirmation email with everything you need</span></div>
+        </div>
+      </div>
+
+      <div class="panel" aria-live="polite">
+        <form id="enquiry" novalidate>
+          <div class="row2">
+            <div class="field"><label for="name">Your first name</label><input type="text" id="name" name="name" autocomplete="given-name" required></div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+          </div>
+          <fieldset>
+            <span class="legend">Where is your business right now?</span>
+            <div class="chips" role="radiogroup">
+              <label class="chip"><input type="radio" id="s-start" name="stage" value="start"><span>Just starting</span></label>
+              <label class="chip"><input type="radio" id="s-running" name="stage" value="running"><span>Up and running</span></label>
+              <label class="chip"><input type="radio" id="s-growing" name="stage" value="growing"><span>Growing fast</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="biz">What kind of business do you run?</label>
+            <select id="biz" name="biz" required>
+              <option value="">Choose one</option>
+              <option>Coaching</option>
+              <option>Therapy or counselling</option>
+              <option>Healing or wellness</option>
+              <option>Courses or programs</option>
+              <option>Other service business</option>
+            </select>
+          </div>
+          <fieldset>
+            <span class="legend">What would you like help with? <span class="hint">Choose any</span></span>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" id="h-admin" name="help" value="admin"><span>Admin and emails</span></label>
+              <label class="chip"><input type="checkbox" id="h-systems" name="help" value="systems"><span>Bookings and systems</span></label>
+              <label class="chip"><input type="checkbox" id="h-marketing" name="help" value="marketing"><span>Social media and newsletters</span></label>
+              <label class="chip"><input type="checkbox" id="h-leads" name="help" value="leads"><span>Following up enquiries</span></label>
+              <label class="chip"><input type="checkbox" id="h-launch" name="help" value="launch"><span>A launch or new program</span></label>
+              <label class="chip"><input type="checkbox" id="h-team" name="help" value="team"><span>Managing my team</span></label>
+              <label class="chip"><input type="checkbox" id="h-numbers" name="help" value="numbers"><span>Tracking my numbers</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="note">Anything else we should know? <span class="hint">Optional</span></label>
+            <textarea id="note" name="note"></textarea>
+          </div>
+          <p class="error" id="err" hidden>Please add your first name, a valid email, where your business is now, and your type of business.</p>
+          <button class="btn btn-primary" type="submit">See where to start</button>
+        </form>
+
+        <div class="result" id="result" hidden>
+          <p class="eyebrow" style="color:var(--accent)">Thank you</p>
+          <h3 id="r-hello">Thanks.</h3>
+          <div class="rec">
+            <span class="badge">Our recommendation</span>
+            <h3 id="r-tier">Growth</h3>
+            <p id="r-why"></p>
+          </div>
+          <p>Next, book your free 30-minute systems review. We'll look at your current setup and show you what we'd change first.</p>
+          <a class="btn btn-primary" id="book-btn" href="#start" target="_blank" rel="noopener">Book my systems review</a>
+          <button class="btn btn-ghost" type="button" id="restart">Change my answers</button>
+          <p class="preview-note" id="preview-note">Preview: this form doesn't send anything yet. When it's connected, your details will be saved, a confirmation email will go out, and the button above will open the booking calendar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap two-col">
+      <div>
+        <p class="eyebrow">About us</p>
+        <h2 style="margin-top:.8rem">A small team with real experience behind it</h2>
+        <p class="lead" style="margin-top:1rem">We're online business managers and systems specialists. We work with service businesses in Australia and around the world, and we handle your operations only. We never access clinical notes or treatment records.</p>
+      </div>
+      <ul class="exp">
+        <li><span class="exp-k">[X]+ years</span><span>managing client relationships, projects and contracts for professional service businesses</span></li>
+        <li><span class="exp-k">[X]+ years</span><span>working alongside coaches, trainers and facilitators, so we know how a coaching business runs day to day</span></li>
+        <li><span class="exp-k">[X] systems</span><span>set up and automated for small businesses <span class="ph">(add once you have them)</span></span></li>
+        <li><span class="exp-k">Tools we know well</span><span>[e.g. Dubsado, Practice Better, Notion, Zapier, Make, Flodesk, Kit, Canva, ChatGPT, Claude]</span></li>
+        <li><span class="exp-k">Certifications</span><span>[e.g. Dubsado Certified Specialist, Zapier Solution Partner]</span></li>
+        <li><span class="exp-k">See it working</span><span>On your free call, we can show you a demo system for a coaching business, from enquiry to follow-up.</span></li>
+      </ul>
+    </div>
+    <div class="wrap">
+      <div class="team">
+        <div class="person"><div class="photo">[Photo]</div><h3>[Team member name]</h3><p class="role">[Role, e.g. Founder and Online Business Manager]</p></div>
+        <div class="person"><div class="photo">[Photo]</div><h3>[Team member name]</h3><p class="role">[Role, e.g. Systems Specialist]</p></div>
+        <div class="person"><div class="photo">[Photo]</div><h3>[Team member name]</h3><p class="role">[Role, e.g. Content and Marketing]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap two-col">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 style="margin-top:.8rem">Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <details><summary>How much does it cost?</summary><p>Essentials starts from USD 650 a month. Growth starts from USD 2,600 for the one-off setup, then from USD 1,500 a month once your systems are live. Launch Setup starts from USD 3,000, one-off. Partner is priced to fit your business after a short call. Australian clients can pay in AUD.</p></details>
+        <details><summary>How long does setup take?</summary><p>Most setups take 3 to 6 weeks. We'll give you a timeline before we start.</p></details>
+        <details><summary>Do I pay for the apps separately?</summary><p>Yes. Apps like booking and email tools are paid directly by you, in your name. Many have free or low-cost plans for new businesses, and we'll help you choose options that fit your budget.</p></details>
+        <details><summary>If we stop working together, do I keep my systems?</summary><p>Yes. Everything is set up in your own accounts, so it all stays with you. We also give you simple written guides for how it works.</p></details>
+        <details><summary>Do I need to change the tools I already use?</summary><p>No. We work with the tools you have where we can. If something isn't working well, we'll suggest a simpler option.</p></details>
+        <details><summary>Do you work with clients outside Australia?</summary><p>Yes. Our main clients are in Australia, and we work with service businesses in other countries too.</p></details>
+        <details><summary>Is there a minimum commitment?</summary><p>Launch Setup is one-off, with nothing ongoing. For monthly plans, we ask for 3 months to start, because systems and marketing need a little time to show results. After that, you can change or stop with notice.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta-box">
+        <h2>Let's review how your business runs today.</h2>
+        <a class="btn btn-primary" href="#start">Book your free systems review</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p style="font-family:var(--display);font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:.5rem"><span style="display:inline-flex;width:24px;height:24px"><svg width="24" height="24" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M72 18 A36 36 0 1 0 72 82" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M36 48 q8 -6 16 0 t16 0" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/><path d="M42 62 q6 -5 12 0 t12 0" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/></svg></span>Cove Studio</p>
+      <p>Email: <span id="email-text">hello@yourdomain.com</span> · <button class="copy" type="button" id="copy-email">Copy</button></p>
+    </div>
+    <div class="foot-links">
+      <a href="#" aria-label="LinkedIn (link to be added)">LinkedIn</a>
+      <a href="#" aria-label="Instagram (link to be added)">Instagram</a>
+      <span>© <span id="yr">2026</span> Cove Studio</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Settings: replace these placeholders when your accounts are ready ---- */
+const SETTINGS = {
+  bookingUrl: "",                 // e.g. your Calendly link
+  email: "hello@yourdomain.com",  // your contact email
+  connected: false                // set to true once the form sends to Tally/Zapier
+};
+
+document.getElementById("email-text").textContent = SETTINGS.email;
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const form = document.getElementById("enquiry");
+const result = document.getElementById("result");
+const err = document.getElementById("err");
+const steps = ["f1","f2","f3","f4"].map(id => document.getElementById(id));
+
+
+document.querySelectorAll(".tier-head").forEach(b => b.addEventListener("click", () => {
+  const open = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", String(!open));
+  document.getElementById(b.getAttribute("aria-controls")).hidden = open;
+  b.querySelector(".tl-text").textContent = open ? "See what's included" : "Hide details";
+}));
+
+
+document.getElementById("see-partner").addEventListener("click", () => {
+  const b = document.querySelector('[aria-controls="t-par"]');
+  if (b && b.getAttribute("aria-expanded") !== "true") b.click();
+});
+
+// Pre-select help areas when a tier button is clicked
+document.querySelectorAll("[data-tier]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const map = { Essentials:["h-admin"], Growth:["h-systems","h-marketing"], Partner:["h-launch","h-numbers","s-growing"], Launch:["s-start","h-systems"] };
+    (map[btn.dataset.tier] || []).forEach(id => { const el = document.getElementById(id); if (el) el.checked = true; });
+  });
+});
+
+function recommend(stage, help){
+  const has = v => help.includes(v);
+  if (stage === "start") {
+    if (has("marketing") || has("leads")) {
+      return ["Launch Setup, then Growth", "You're just starting and want help with marketing too. Launch Setup gets your systems ready for your first clients. When you're ready for regular marketing, you can move to Growth."];
+    }
+    return ["Launch Setup", "You're just starting out. Launch Setup gives you the foundations for systems, marketing and sales from day one, with no monthly plan needed."];
+  }
+  if (stage === "growing" && (has("launch") || has("team") || has("numbers"))) {
+    return ["Partner", "Your business is growing and you'd like help with launches, a team or your numbers. Partner gives you a team to plan and run these with you. We'll tailor the price on our call."];
+  }
+  if (has("admin") && !has("systems") && !has("marketing") && !has("leads") && !has("launch")) {
+    return ["Essentials", "You'd mostly like help with admin. Essentials takes care of your inbox, calendar and bookings. You can add systems and marketing any time."];
+  }
+  const extra = has("launch") ? " We can also talk about your launch on the call." : "";
+  return ["Growth", "Growth connects your systems, keeps your marketing going every month, and gives you a clear process for turning enquiries into clients." + extra];
+}
+
+function lightUp(n){ steps.forEach((s,i) => s.classList.toggle("done", i < n)); }
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const biz = document.getElementById("biz").value;
+  const stageEl = form.querySelector('input[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : "";
+  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !okEmail || !biz || !stage) { err.hidden = false; return; }
+  err.hidden = true;
+  const help = [...form.querySelectorAll('input[name="help"]:checked')].map(i => i.value);
+  const [tier, why] = recommend(stage, help);
+  document.getElementById("r-hello").textContent = `Thanks, ${name}.`;
+  document.getElementById("r-tier").textContent = tier;
+  document.getElementById("r-why").textContent = why;
+  const book = document.getElementById("book-btn");
+  if (SETTINGS.bookingUrl) { book.href = SETTINGS.bookingUrl; } else { book.removeAttribute("target"); book.href = "#start"; book.textContent = "Booking calendar coming soon"; }
+  document.getElementById("preview-note").hidden = SETTINGS.connected;
+  form.hidden = true; result.hidden = false;
+  lightUp(1); setTimeout(() => lightUp(2), 350);
+});
+
+document.getElementById("book-btn").addEventListener("click", () => lightUp(3));
+document.getElementById("restart").addEventListener("click", () => { result.hidden = true; form.hidden = false; lightUp(0); });
+
+document.getElementById("copy-email").addEventListener("click", async () => {
+  const btn = document.getElementById("copy-email");
+  try { await navigator.clipboard.writeText(SETTINGS.email); btn.textContent = "Copied"; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("email-text")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+  setTimeout(() => btn.textContent = "Copy", 1800);
+});
+</script>
+
+</body>
+</html>
